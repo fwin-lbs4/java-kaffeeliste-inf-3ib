@@ -1,4 +1,4 @@
-package memoFwin.lbs4;
+package memoFwinAdrian.lbs.vier;
 
 public class User {
     private String name;
