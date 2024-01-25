@@ -1,6 +1,8 @@
 package memoFwinAdrian.lbs.vier;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
@@ -8,16 +10,28 @@ import java.io.IOException;
 
 
 public class CoffeeApplication extends Application {
-    @Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(CoffeeApplication.class.getResource("coffee-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
-        stage.setScene(scene);
-        stage.show();
-    }
-
     public static void main(String[] args) {
         launch();
+    }
+
+    @Override
+    public void start(Stage stage) throws IOException {
+//        Datenbank db = new Datenbank();
+        FXMLLoader userLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-user-view.fxml"));
+        FXMLLoader coffeeLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-coffee-view.fxml"));
+        Parent userRoot = userLoader.load();
+        Parent coffeeRoot = coffeeLoader.load();
+
+        Scene scene = new Scene(userRoot, 320, 240);
+        stage.setTitle("Select User!");
+        stage.setScene(scene);
+
+        SelectUserController userController = userLoader.getController();
+        SelectCoffeeController coffeeController = coffeeLoader.getController();
+
+        userController.setup(null, stage, scene, null, coffeeRoot);
+        coffeeController.setup(null, stage, scene, userRoot, null);
+
+        stage.show();
     }
 }
