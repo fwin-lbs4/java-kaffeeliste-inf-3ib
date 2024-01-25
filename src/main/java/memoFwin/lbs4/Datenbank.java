@@ -1,6 +1,9 @@
 package memoFwin.lbs4;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 
 public class Datenbank {
 
@@ -41,6 +44,25 @@ public class Datenbank {
             rs.close();
 
             User user = new User(name, schulden, idUser, rolle);
+            return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public User addSchulden(User user, int schulden) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "INSERT INTO schulden\n" +
+                        "(`User_idUser,`" +
+                        "`Anderung`,\n" +
+                        "`Zeitstempel`)\n" +
+                        "VALUES\n" +
+                        "(?,?,?);")) {
+            preparedStatement.setInt(1, user.getIdUser());
+            preparedStatement.setInt(2, schulden);
+            preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
+            user.setSchulden(user.getSchulden() + schulden);
             return user;
         } catch (SQLException e) {
             e.printStackTrace();

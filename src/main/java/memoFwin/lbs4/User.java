@@ -21,8 +21,11 @@ public class User {
     public int getSchulden() {
         return schulden;
     }
-
     public String getRolle() {
         return rolle;
+    }
+
+    public void setSchulden(int schulden) {
+        this.schulden = schulden;
     }
 }
