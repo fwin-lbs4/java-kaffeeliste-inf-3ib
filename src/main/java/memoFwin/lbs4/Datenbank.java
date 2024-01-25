@@ -4,6 +4,8 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Datenbank {
 
@@ -40,11 +42,39 @@ public class Datenbank {
             rs.first();
             name = rs.getString("Name");
             rolle = rs.getString("Rolle");
-            schulden = rs.getInt("Schulden");
+            schulden = rs.getInt("Anderung");
             rs.close();
 
             User user = new User(name, schulden, idUser, rolle);
             return user;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public List<User> getAllUserInfos(int idUser) {
+        List<User> users = new ArrayList<User>();
+
+        String name = "";
+        String rolle = "";
+        int schulden = 0;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "Select u.Name, u.Rolle, u.idUser, Sum(s.Anderung) from user u\n" +
+                        "JOIN schulden s ON u.idUser = s.User_idUser;")) {
+
+            ResultSet rs = preparedStatement.executeQuery();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    name = rs.getString("Name");
+                    rolle = rs.getString("Rolle");
+                    schulden = rs.getInt("Schulden");
+                    User user = new User(name, schulden, idUser, rolle);
+                    users.add(user);
+                }
+            }
+            return users;
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
