@@ -58,7 +58,7 @@ public class Datenbank {
             preparedStatement.setInt(1, idUser);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
-                if (!resultSet.first()) {
+                if (!resultSet.next()) {
                     throw new SQLException("No Rows found");
                 }
                 String name = resultSet.getString("Name");
@@ -150,7 +150,7 @@ public class Datenbank {
      *
      * @param user     Das Benutzerobjekt, für das Schulden hinzugefügt werden sollen.
      * @param schulden Der Betrag der hinzuzufügenden Schulden.
-     * @return Das aktualisierte Benutzerobjekt mit den neuen Schuldeninformationen.
+     * @return True wenn Schulden hinzufügen erfolgreich war sonst False.
      */
     public Boolean addSchulden(User user, int schulden) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(

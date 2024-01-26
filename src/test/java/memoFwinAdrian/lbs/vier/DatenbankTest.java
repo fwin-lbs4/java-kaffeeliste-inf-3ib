@@ -45,9 +45,9 @@ class DatenbankTest {
         int alteSchulden = user.getSchulden();
 
         int schuldenToAdd = 50;
-        User updatedUser = datenbank.addSchulden(user, schuldenToAdd);
+        datenbank.addSchulden(user, schuldenToAdd);
 
-        int neueSchulden = updatedUser.getSchulden();
+        int neueSchulden = user.getSchulden();
 
         assertEquals(alteSchulden + schuldenToAdd, neueSchulden);
     }
