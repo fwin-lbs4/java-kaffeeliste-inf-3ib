@@ -2,23 +2,28 @@ package memoFwinAdrian.lbs.vier;
 
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Die Datenbank-Klasse ermöglicht die Verbindung und Interaktion mit der Datenbank
+ * für die Verwaltung von Benutzerinformationen und Schulden.
+ */
 public class Datenbank {
 
     private Connection connection;
 
     /**
-     * Konstruktor für die DatabaseConnector-Klasse.
+     * Konstruktor für die Datenbank-Klasse.
      *
-     * @param url      Die URL für die Datenbankverbindung.
-     * @param username Der Benutzername für die Datenbankverbindung.
-     * @param password Das Passwort für die Datenbankverbindung.
+     * Die URL für die Datenbankverbindung.
+     * Der Benutzername für die Datenbankverbindung.
+     * Das Passwort für die Datenbankverbindung.
      */
-    public Datenbank(String url, String username, String password) {
+    public Datenbank() {
+        String url = "jdbc:mysql://localhost:3306/kaffeliste";
+        String username = "root";
+        String password = "";
         try {
             this.connection = DriverManager.getConnection(url, username, password);
             System.out.println("Verbindung hergestellt");
@@ -28,6 +33,12 @@ public class Datenbank {
         }
     }
 
+    /**
+     * Ruft die Informationen eines Benutzers anhand seiner ID aus der Datenbank ab.
+     *
+     * @param idUser Die ID des Benutzers.
+     * @return Ein Objekt der Klasse User mit den Benutzerinformationen.
+     */
     public User getUserInfos(int idUser) {
         String name = "";
         String rolle = "";
@@ -53,8 +64,14 @@ public class Datenbank {
         }
     }
 
+    /**
+     * Ruft die Informationen aller Benutzer aus der Datenbank ab.
+     *
+     * @param idUser Die ID des Benutzers.
+     * @return Eine Liste von User-Objekten mit den Benutzerinformationen.
+     */
     public List<User> getAllUserInfos(int idUser) {
-        List<User> users = new ArrayList<User>();
+        List<User> users = new ArrayList<>();
 
         String name = "";
         String rolle = "";
@@ -81,6 +98,13 @@ public class Datenbank {
         }
     }
 
+    /**
+     * Fügt Schulden für einen Benutzer in die Datenbank ein.
+     *
+     * @param user     Das Benutzerobjekt, für das Schulden hinzugefügt werden sollen.
+     * @param schulden Der Betrag der hinzuzufügenden Schulden.
+     * @return Das aktualisierte Benutzerobjekt mit den neuen Schuldeninformationen.
+     */
     public User addSchulden(User user, int schulden) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO schulden\n" +
@@ -100,4 +124,3 @@ public class Datenbank {
         }
     }
 }
-
