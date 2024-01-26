@@ -45,18 +45,20 @@ public class Datenbank {
         int schulden = 0;
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 """
-                        SELECT us.Name, Sum(sld.Anderung), us.Rolle FROM user us
+                        SELECT us.Name as Name, Sum(sld.Anderung) as Schulden, us.Rolle as Rolle FROM user us
                         JOIN schulden sld ON us.idUser = sld.Anderung
                         WHERE us.idUser = ? 
                     """)) {
 
             preparedStatement.setInt(1, idUser);
-            ResultSet rs = preparedStatement.executeQuery();
-            rs.first();
-            name = rs.getString("Name");
-            rolle = rs.getString("Rolle");
-            schulden = rs.getInt("Anderung");
-            rs.close();
+
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    name = resultSet.getString("Name");
+                    rolle = resultSet.getString("Rolle");
+                    schulden = resultSet.getInt("Schulden");
+                }
+            }
 
             User user = new User(name, schulden, idUser, rolle);
             return user;
@@ -81,16 +83,15 @@ public class Datenbank {
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 """
-                        Select u.Name, u.Rolle, u.idUser, Sum(s.Anderung) from user u 
+                        Select u.Name as Name, u.Rolle as Rolle, u.idUser, Sum(s.Anderung) as Schulden from user u 
                         JOIN schulden s ON u.idUser = s.User_idUser;
                     """)) {
 
-            ResultSet rs = preparedStatement.executeQuery();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    name = rs.getString("Name");
-                    rolle = rs.getString("Rolle");
-                    schulden = rs.getInt("Schulden");
+                    name = resultSet.getString("Name");
+                    rolle = resultSet.getString("Rolle");
+                    schulden = resultSet.getInt("Schulden");
                     User user = new User(name, schulden, idUser, rolle);
                     users.add(user);
                 }
@@ -115,14 +116,13 @@ public class Datenbank {
         int idKaffee = 0;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "Select Preis, Name, idKaffee from kaffee;")) {
+                "Select Preis as Preis, Name as Name, idKaffee as idKaffee from kaffee;")) {
 
-            ResultSet rs = preparedStatement.executeQuery();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    idKaffee = rs.getInt("idKaffee");
-                    name = rs.getString("Name");
-                    preis = rs.getInt("Preis");
+                    idKaffee = resultSet.getInt("idKaffee");
+                    name = resultSet.getString("Name");
+                    preis = resultSet.getInt("Preis");
                     Coffee coffee = new Coffee(idKaffee, name, preis);
                     coffees.add(coffee);
                 }
