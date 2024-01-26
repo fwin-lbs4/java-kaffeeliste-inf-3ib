@@ -71,27 +71,28 @@ public class Datenbank {
     /**
      * Ruft die Informationen aller Benutzer aus der Datenbank ab.
      *
-     * @param idUser Die ID des Benutzers.
      * @return Eine Liste von User-Objekten mit den Benutzerinformationen.
      */
-    public List<User> getAllUserInfos(int idUser) {
+    public List<User> getAllUserInfos() {
         List<User> users = new ArrayList<>();
-
-        String name = "";
-        String rolle = "";
-        int schulden = 0;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 """
-                        Select u.Name as Name, u.Rolle as Rolle, u.idUser, Sum(s.Anderung) as Schulden from user u 
-                        JOIN schulden s ON u.idUser = s.User_idUser;
+                        SELECT
+                            u.Name AS Name,
+                            u.Rolle AS Rolle,
+                            u.idUser AS idUser,
+                            SUM(s.Anderung) AS Schulden
+                        FROM `user` AS u
+                        JOIN schulden AS s ON u.idUser = s.User_idUser;
                     """)) {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    name = resultSet.getString("Name");
-                    rolle = resultSet.getString("Rolle");
-                    schulden = resultSet.getInt("Schulden");
+                    String name = resultSet.getString("Name");
+                    String rolle = resultSet.getString("Rolle");
+                    int schulden = resultSet.getInt("Schulden");
+                    int idUser = resultSet.getInt("idUser");
                     User user = new User(name, schulden, idUser, rolle);
                     users.add(user);
                 }

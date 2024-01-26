@@ -20,11 +20,10 @@ public class CoffeeApplication extends Application {
     public void start(Stage stage) throws IOException {
         User currentUser = null;
         List<User> userList = new ArrayList<>();
-        userList.add(new User("Flo", 500, 1, "User"));
-        userList.add(new User("Adrian", 250, 2, "User"));
-        userList.add(new User("Memo", 50000, 3, "User"));
 
-//        Datenbank db = new Datenbank();
+        Datenbank db = new Datenbank();
+        userList = db.getAllUserInfos();
+        userList.forEach(user -> System.out.println(user.getName()));
         FXMLLoader userLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-user-view.fxml"));
         FXMLLoader coffeeLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-coffee-view.fxml"));
         Parent userRoot = userLoader.load();
@@ -37,8 +36,8 @@ public class CoffeeApplication extends Application {
         SelectUserController userController = userLoader.getController();
         SelectCoffeeController coffeeController = coffeeLoader.getController();
 
-        userController.setup(null, stage, scene, null, coffeeRoot, currentUser, userList);
-        coffeeController.setup(null, stage, scene, userRoot, null, currentUser, userList);
+        userController.setup(db, stage, scene, null, coffeeRoot, currentUser, userList);
+        coffeeController.setup(db, stage, scene, userRoot, null, currentUser, userList);
 
         stage.show();
     }

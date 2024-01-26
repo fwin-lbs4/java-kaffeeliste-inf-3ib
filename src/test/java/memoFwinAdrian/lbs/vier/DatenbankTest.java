@@ -20,10 +20,8 @@ class DatenbankTest {
 
     @Test
     void getAllUserInfos() {
-        int userId = 1;
-
         Datenbank datenbank = new Datenbank();
-        List<User> users = datenbank.getAllUserInfos(userId);
+        List<User> users = datenbank.getAllUserInfos();
 
         assertNotNull(users);
         assertTrue(users.size() > 0);
