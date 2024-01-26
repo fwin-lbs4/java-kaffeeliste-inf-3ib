@@ -21,7 +21,7 @@ public class Datenbank {
      * Das Passwort für die Datenbankverbindung.
      */
     public Datenbank() {
-        String url = "jdbc:mysql://localhost:3306/kaffeliste";
+        String url = "jdbc:mysql://localhost:3306/kaffeeliste";
         String username = "root";
         String password = "";
         try {
