@@ -44,30 +44,12 @@ public class Coffee {
     }
 
     /**
-     * Setzt die eindeutige Kennung des Kaffees.
-     *
-     * @param idKaffee Die zu setzende eindeutige Kennung.
-     */
-    public void setIdKaffee(int idKaffee) {
-        this.idKaffee = idKaffee;
-    }
-
-    /**
      * Gibt den Namen des Kaffees zurück.
      *
      * @return Der Name des Kaffees.
      */
     public String getName() {
         return name;
-    }
-
-    /**
-     * Setzt den Namen des Kaffees.
-     *
-     * @param name Der zu setzende Name.
-     */
-    public void setName(String name) {
-        this.name = name;
     }
 
     /**
@@ -79,13 +61,5 @@ public class Coffee {
         return preis;
     }
 
-    /**
-     * Setzt den Preis des Kaffees.
-     *
-     * @param preis Der zu setzende Preis.
-     */
-    public void setPreis(int preis) {
-        this.preis = preis;
-    }
 }
 

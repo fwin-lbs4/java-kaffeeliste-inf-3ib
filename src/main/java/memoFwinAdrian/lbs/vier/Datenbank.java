@@ -44,9 +44,11 @@ public class Datenbank {
         String rolle = "";
         int schulden = 0;
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "SELECT us.Name, Sum(sld.Anderung), us.Rolle FROM user us\n" +
-                        "JOIN schulden sld ON us.idUser = sld.Anderung\n" +
-                        "WHERE us.idUser = ?")) {
+                """
+                        SELECT us.Name, Sum(sld.Anderung), us.Rolle FROM user us
+                        JOIN schulden sld ON us.idUser = sld.Anderung
+                        WHERE us.idUser = ? 
+                    """)) {
 
             preparedStatement.setInt(1, idUser);
             ResultSet rs = preparedStatement.executeQuery();
@@ -78,8 +80,10 @@ public class Datenbank {
         int schulden = 0;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "Select u.Name, u.Rolle, u.idUser, Sum(s.Anderung) from user u\n" +
-                        "JOIN schulden s ON u.idUser = s.User_idUser;")) {
+                """
+                        Select u.Name, u.Rolle, u.idUser, Sum(s.Anderung) from user u 
+                        JOIN schulden s ON u.idUser = s.User_idUser;
+                    """)) {
 
             ResultSet rs = preparedStatement.executeQuery();
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -139,12 +143,14 @@ public class Datenbank {
      */
     public User addSchulden(User user, int schulden) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
-                "INSERT INTO schulden\n" +
-                        "(`User_idUser,`" +
-                        "`Anderung`,\n" +
-                        "`Zeitstempel`)\n" +
-                        "VALUES\n" +
-                        "(?,?,?);")) {
+                """
+                        INSERT INTO schulden
+                        (`User_idUser,``Anderung`,
+                        `Zeitstempel`)
+                        VALUES
+                        (?,?,?);
+                        """
+                )) {
             preparedStatement.setInt(1, user.getIdUser());
             preparedStatement.setInt(2, schulden);
             preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
