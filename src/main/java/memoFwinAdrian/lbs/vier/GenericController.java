@@ -18,7 +18,15 @@ public class GenericController {
     protected List<User> userList;
 
 
-    public void setup(Datenbank db, Stage stage, Scene scene, Parent previousRoot, Parent nextRoot, User currentUser, List<User> userList) {
+    public void setup(
+            Datenbank db,
+            Stage stage,
+            Scene scene,
+            Parent previousRoot,
+            Parent nextRoot,
+            User currentUser,
+            List<User> userList
+    ) {
         this.db = db;
         this.stage = stage;
         this.scene = scene;
@@ -26,5 +34,10 @@ public class GenericController {
         this.nextRoot = nextRoot;
         this.currentUser = currentUser;
         this.userList = userList;
+
+        this.init();
+    }
+
+    protected void init() {
     }
 }
