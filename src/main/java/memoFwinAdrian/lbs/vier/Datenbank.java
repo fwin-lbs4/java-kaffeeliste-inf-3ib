@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class Datenbank {
 
-    private Connection connection;
+    private final Connection connection;
 
     /**
      * Konstruktor für die Datenbank-Klasse.
