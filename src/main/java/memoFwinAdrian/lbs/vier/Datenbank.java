@@ -99,6 +99,38 @@ public class Datenbank {
     }
 
     /**
+     * Ruft die Informationen aller Kaffees aus der Datenbank ab.
+     *
+     * @return Eine Liste von Caffee-Objekten mit der Kaffelisten Information.
+     */
+    public List<Coffee> getAllCoffees() {
+        List<Coffee> coffees = new ArrayList<>();
+
+        String name = "";
+        int preis = 0;
+        int idKaffee = 0;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(
+                "Select Preis, Name, idKaffee from kaffee;")) {
+
+            ResultSet rs = preparedStatement.executeQuery();
+            try (ResultSet resultSet = preparedStatement.executeQuery()) {
+                while (resultSet.next()) {
+                    idKaffee = rs.getInt("idKaffee");
+                    name = rs.getString("Name");
+                    preis = rs.getInt("Preis");
+                    Coffee coffee = new Coffee(idKaffee, name, preis);
+                    coffees.add(coffee);
+                }
+            }
+            return coffees;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
      * Fügt Schulden für einen Benutzer in die Datenbank ein.
      *
      * @param user     Das Benutzerobjekt, für das Schulden hinzugefügt werden sollen.
