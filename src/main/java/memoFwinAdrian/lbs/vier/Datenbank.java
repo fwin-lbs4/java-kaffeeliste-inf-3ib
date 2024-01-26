@@ -21,9 +21,9 @@ public class Datenbank {
      * Das Passwort für die Datenbankverbindung.
      */
     public Datenbank() {
-        String url = "jdbc:mysql://localhost:3306/kaffeeliste";
+        String url = "jdbc:mysql://localhost/kaffeeliste";
         String username = "root";
-        String password = "";
+        String password = null;
         try {
             this.connection = DriverManager.getConnection(url, username, password);
             System.out.println("Verbindung hergestellt");
@@ -82,9 +82,10 @@ public class Datenbank {
                             u.Name AS Name,
                             u.Rolle AS Rolle,
                             u.idUser AS idUser,
-                            SUM(s.Anderung) AS Schulden
-                        FROM `user` AS u
-                        JOIN schulden AS s ON u.idUser = s.User_idUser;
+                            COALESCE(SUM(s.Anderung), 0) AS Schulden
+                        FROM user AS u
+                        LEFT JOIN schulden AS s ON u.idUser = s.User_idUser
+                        GROUP BY u.idUser;
                     """)) {
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
