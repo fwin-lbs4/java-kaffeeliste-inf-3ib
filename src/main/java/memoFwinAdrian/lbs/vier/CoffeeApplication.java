@@ -18,12 +18,11 @@ public class CoffeeApplication extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        User currentUser = null;
-        List<User> userList = new ArrayList<>();
-
         Datenbank db = new Datenbank();
-        userList = db.getAllUserInfos();
-        userList.forEach(user -> System.out.println(user.getName()));
+
+        User currentUser = null;
+        List<User> userList = db.getAllUserInfos();
+
         FXMLLoader userLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-user-view.fxml"));
         FXMLLoader coffeeLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-coffee-view.fxml"));
         Parent userRoot = userLoader.load();
