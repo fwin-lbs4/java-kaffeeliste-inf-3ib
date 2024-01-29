@@ -39,10 +39,9 @@ public class SelectUserController extends GenericController {
             return;
         }
 
-
         this.stage.setTitle("Select Coffee!");
         this.scene.setRoot(this.nextRoot);
-
+        this.nextController.refresh();
     }
 
 

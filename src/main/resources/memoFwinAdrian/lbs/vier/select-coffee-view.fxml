@@ -7,6 +7,8 @@
 <?import javafx.scene.control.Label?>
 <VBox alignment="BOTTOM_CENTER" spacing="16.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="memoFwinAdrian.lbs.vier.SelectCoffeeController">
+
+    <Label fx:id="selectedUserLabel"/>
     <VBox alignment="TOP_CENTER" spacing="8.0" VBox.vgrow="ALWAYS" maxHeight="Infinity" fx:id="coffeeBox"/>
 
     <HBox spacing="8.0">

@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
@@ -11,11 +12,14 @@ import java.util.List;
 
 public class SelectCoffeeController extends GenericController {
     private final List<Coffee> coffeeList = new ArrayList<>();
+    @FXML
+    private Label selectedUserLabel;
     private Coffee selectedCoffee;
     @FXML
     private VBox coffeeBox;
     @FXML
     private Button submitButton;
+
     @FXML
     protected void onRefreshButtonClick() {
         System.out.println(this.currentUser.getUser() == null ? "Null" : this.currentUser.getUser().getName());
@@ -49,6 +53,16 @@ public class SelectCoffeeController extends GenericController {
                     -fx-background-color: rgb(0,255,0,0.25);
                     -fx-border-color: rgb(0, 255, 255);
                 """ : "");
+    }
+
+    public void refresh() {
+        if (this.currentUser.getUser() == null) {
+            this.onBackButtonClick();
+        }
+
+        this.selectedUserLabel.setText("User \"" + this.currentUser
+                .getUser()
+                .getName() + "\" Schulden: \"" + this.currentUser.getUser().getSchuldenString() + "\"");
     }
 
     @FXML
