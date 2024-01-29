@@ -44,6 +44,7 @@ public class Datenbank {
        """
                 SELECT
                     u.Name as Name,
+                    u.Pin as Pin,
                     COALESCE(SUM(s.Anderung), 0) AS Schulden,
                     u.Rolle as Rolle
                 FROM
@@ -62,10 +63,12 @@ public class Datenbank {
                     throw new SQLException("No Rows found");
                 }
                 String name = resultSet.getString("Name");
+                int pin = resultSet.getInt("Pin");
+
                 String rolle = resultSet.getString("Rolle");
                 int schulden = resultSet.getInt("Schulden");
 
-                return new User(name, schulden, idUser, rolle);
+                return new User(name, schulden, idUser, rolle, pin);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -87,6 +90,7 @@ public class Datenbank {
                    u.Name AS Name,
                    u.Rolle AS Rolle,
                    u.idUser AS idUser,
+                   u.pin AS Pin
                    COALESCE(SUM(s.Anderung), 0) AS Schulden
                FROM
                    user AS u
@@ -100,7 +104,8 @@ public class Datenbank {
                     String rolle = resultSet.getString("Rolle");
                     int schulden = resultSet.getInt("Schulden");
                     int idUser = resultSet.getInt("idUser");
-                    User user = new User(name, schulden, idUser, rolle);
+                    int pin = resultSet.getInt("Pin");
+                    User user = new User(name, schulden, idUser, rolle, pin);
                     users.add(user);
                 }
             }

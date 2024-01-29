@@ -5,12 +5,14 @@ public class User {
     private int idUser;
     private int schulden;
     private String rolle;
+    private int pin;
 
-    public User(String name, int schulden, int idUser, String rolle){
+    public User(String name, int schulden, int idUser, String rolle, int pin){
         this.name = name;
         this.schulden = schulden;
         this.idUser = idUser;
         this.rolle = rolle;
+        this.pin = pin;
     }
     public int getIdUser() {
         return idUser;
