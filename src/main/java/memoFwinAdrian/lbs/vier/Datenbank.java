@@ -90,7 +90,7 @@ public class Datenbank {
                    u.Name AS Name,
                    u.Rolle AS Rolle,
                    u.idUser AS idUser,
-                   u.pin AS Pin
+                   u.pin AS Pin,
                    COALESCE(SUM(s.Anderung), 0) AS Schulden
                FROM
                    user AS u

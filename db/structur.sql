@@ -83,3 +83,5 @@ Use kaffeeliste;
 
 ALTER TABLE user
     ADD pin int NULL;
+#-----------insert
+UPDATE `user` SET `pin` = '1234' WHERE `user`.`idUser` = 1;
