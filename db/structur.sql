@@ -77,3 +77,11 @@ INSERT INTO `kaffee` (`idKaffee`, `Name`, `Preis`) VALUES
                                                        (1, 'Espresso', 100),
                                                        (2, 'Verlängerter', 150),
                                                        (3, 'Cappuccino', 250);
+#------pin
+
+Use kaffeeliste;
+
+ALTER TABLE user
+    ADD pin int NULL;
+#-----------insert
+UPDATE `user` SET `pin` = '1234' WHERE `user`.`idUser` = 1;
