@@ -18,6 +18,7 @@ public class SelectCoffeeController extends GenericController {
     private Button submitButton;
     @FXML
     protected void onRefreshButtonClick() {
+        System.out.println(this.currentUser.getUser() == null ? "Null" : this.currentUser.getUser().getName());
         if (this.currentUser == null) {
             this.onBackButtonClick();
         }
@@ -52,8 +53,8 @@ public class SelectCoffeeController extends GenericController {
 
     @FXML
     protected void onSubmitButtonClick() {
-        if (this.currentUser != null && this.selectedCoffee != null) {
-            this.currentUser.setSchulden(this.selectedCoffee.getPreis());
+        if (this.currentUser.getUser() != null && this.selectedCoffee != null) {
+            this.db.addSchulden(this.currentUser.getUser(), this.selectedCoffee.getPreis());
         }
         this.onBackButtonClick();
     }
@@ -61,7 +62,6 @@ public class SelectCoffeeController extends GenericController {
     @FXML
     protected void onBackButtonClick() {
         this.selectedCoffee = null;
-        this.currentUser = null;
         this.stage.setTitle("Select User!");
         this.scene.setRoot(this.previousRoot);
     }

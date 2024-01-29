@@ -19,7 +19,9 @@ public class CoffeeApplication extends Application {
     public void start(Stage stage) throws IOException {
         Datenbank db = new Datenbank();
 
-        User currentUser = null;
+        UserHolder holder = UserHolder.getInstance();
+        holder.setUser(null);
+
         List<User> userList = db.getAllUserInfos();
 
         FXMLLoader userLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-user-view.fxml"));
@@ -34,8 +36,8 @@ public class CoffeeApplication extends Application {
         SelectUserController userController = userLoader.getController();
         SelectCoffeeController coffeeController = coffeeLoader.getController();
 
-        userController.setup(db, stage, scene, null, coffeeRoot, currentUser, userList);
-        coffeeController.setup(db, stage, scene, userRoot, null, currentUser, userList);
+        userController.setup(db, stage, scene, null, coffeeRoot, holder, userList);
+        coffeeController.setup(db, stage, scene, userRoot, null, holder, userList);
 
         stage.show();
     }
