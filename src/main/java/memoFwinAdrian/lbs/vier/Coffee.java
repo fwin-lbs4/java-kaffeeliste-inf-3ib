@@ -61,5 +61,18 @@ public class Coffee {
         return preis;
     }
 
+    private String getPreisString() {
+        String cents = Integer.toString(this.preis);
+        cents = cents.substring(cents.length() - 2);
+        String euro = Integer.toString(this.preis);
+        euro = euro.substring(0, euro.length() - 2);
+
+        return "€ " + euro + "," + (cents.equals("00") ? "--" : cents);
+    }
+
+    public String toString() {
+        return this.getName() + " " + this.getPreisString();
+    }
+
 }
 
