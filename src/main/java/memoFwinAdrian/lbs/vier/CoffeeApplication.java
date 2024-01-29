@@ -36,8 +36,8 @@ public class CoffeeApplication extends Application {
         SelectUserController userController = userLoader.getController();
         SelectCoffeeController coffeeController = coffeeLoader.getController();
 
-        userController.setup(db, stage, scene, null, coffeeRoot, holder, userList);
-        coffeeController.setup(db, stage, scene, userRoot, null, holder, userList);
+        userController.setup(db, stage, scene, null, null, coffeeRoot, coffeeController, holder, userList);
+        coffeeController.setup(db, stage, scene, userRoot, userController, null, null, holder, userList);
 
         stage.show();
     }
