@@ -33,8 +33,15 @@ public class SelectUserController extends GenericController {
     }
     @FXML
     protected void onNextButtonClick() {
+        this.currentUser = (User) this.choiceBox.getSelectionModel().getSelectedItem();
+        if (this.currentUser == null){
+            return;
+        }
+
+
         this.stage.setTitle("Select Coffee!");
         this.scene.setRoot(this.nextRoot);
+
     }
 
 

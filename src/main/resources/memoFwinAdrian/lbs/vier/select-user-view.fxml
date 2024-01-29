@@ -16,6 +16,5 @@
     <ChoiceBox fx:id="choiceBox" onShowing="#onSelectClick"/>
 
 
-    <Button text="Refresh" onAction="#onRefreshButtonClick"/>
     <Button text="Next" onAction="#onNextButtonClick"/>
 </VBox>
