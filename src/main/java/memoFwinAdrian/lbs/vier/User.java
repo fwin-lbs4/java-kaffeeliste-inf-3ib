@@ -28,4 +28,7 @@ public class User {
     public void setSchulden(int schulden) {
         this.schulden = schulden;
     }
+    public String toString() {
+        return this.getName();
+    }
 }

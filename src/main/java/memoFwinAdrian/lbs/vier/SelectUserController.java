@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.SelectionModel;
 
 import java.util.ArrayList;
 
@@ -26,11 +27,9 @@ public class SelectUserController extends GenericController {
 
     @FXML
     protected void onRefreshButtonClick() {
-        ObservableList<String> list = this.choiceBox.getItems();
+        ObservableList<User> list = this.choiceBox.getItems();
         list.clear();
-        this.userList.forEach((user)->{
-            list.add(user.getName());
-        });
+        list.addAll(this.userList);
     }
     @FXML
     protected void onNextButtonClick() {
