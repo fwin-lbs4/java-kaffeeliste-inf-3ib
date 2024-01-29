@@ -33,8 +33,9 @@ public class SelectUserController extends GenericController {
     }
     @FXML
     protected void onNextButtonClick() {
-        this.currentUser = (User) this.choiceBox.getSelectionModel().getSelectedItem();
-        if (this.currentUser == null){
+        this.currentUser.setUser((User) this.choiceBox.getSelectionModel().getSelectedItem());
+        System.out.println(this.currentUser.getUser() == null ? "Null" : this.currentUser.getUser().getName());
+        if (this.currentUser.getUser() == null){
             return;
         }
 
