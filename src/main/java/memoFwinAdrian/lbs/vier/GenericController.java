@@ -13,7 +13,7 @@ public class GenericController {
     protected Parent nextRoot;
     protected Datenbank db;
 
-    protected User currentUser;
+    protected UserHolder currentUser;
 
     protected List<User> userList;
 
@@ -24,7 +24,7 @@ public class GenericController {
             Scene scene,
             Parent previousRoot,
             Parent nextRoot,
-            User currentUser,
+            UserHolder currentUser,
             List<User> userList
     ) {
         this.db = db;
