@@ -31,4 +31,13 @@ public class User {
     public String toString() {
         return this.getName();
     }
+
+    public String getSchuldenString() {
+        String cents = Integer.toString(this.schulden);
+        cents = cents.substring(cents.length() - 2);
+        String euro = Integer.toString(this.schulden);
+        euro = euro.substring(0, euro.length() - 2);
+
+        return "€ " + euro + "," + (cents.equals("00") ? "--" : cents);
+    }
 }
