@@ -19,6 +19,10 @@ public class SelectUserController extends GenericController {
 
     @FXML
     private ChoiceBox choiceBox;
+    @FXML
+    protected void onSelectClick(){
+        onRefreshButtonClick();
+    }
 
     @FXML
     protected void onRefreshButtonClick() {

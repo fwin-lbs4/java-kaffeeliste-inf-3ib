@@ -13,7 +13,8 @@
 
     <Label fx:id="welcomeText"/>
 
-    <ChoiceBox fx:id="choiceBox"/>
+    <ChoiceBox fx:id="choiceBox" onShowing="#onSelectClick"/>
+
 
     <Button text="Refresh" onAction="#onRefreshButtonClick"/>
     <Button text="Next" onAction="#onNextButtonClick"/>
