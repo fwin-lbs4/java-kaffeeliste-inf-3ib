@@ -49,10 +49,10 @@ public class Datenbank {
                     u.Rolle as Rolle
                 FROM
                     user AS u
-                   LEFT JOIN schulden AS s ON u.idUser = s.User_idUser
-               WHERE u.idUser = ?
-               GROUP BY u.idUser
-               LIMIT 1
+                    LEFT JOIN schulden AS s ON u.idUser = s.User_idUser
+                WHERE u.idUser = ?
+                GROUP BY u.idUser
+                LIMIT 1
            """
         )) {
 

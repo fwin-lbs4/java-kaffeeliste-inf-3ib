@@ -16,6 +16,14 @@ CREATE SCHEMA IF NOT EXISTS `kaffeeliste` DEFAULT CHARACTER SET utf8 ;
 USE `kaffeeliste` ;
 
 -- -----------------------------------------------------
+-- Dropt Tables
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `kaffeeliste`.`Kaffee`;
+DROP TABLE IF EXISTS `kaffeeliste`.`User`;
+DROP TABLE IF EXISTS `kaffeeliste`.`Schulden`;
+
+
+-- -----------------------------------------------------
 -- Table `kaffeeliste`.`Kaffee`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `kaffeeliste`.`Kaffee` (
@@ -33,6 +41,7 @@ CREATE TABLE IF NOT EXISTS `kaffeeliste`.`User` (
                                                     `idUser` INT NOT NULL AUTO_INCREMENT,
                                                     `Name` VARCHAR(45) NULL,
                                                     `Rolle` VARCHAR(45) NULL,
+                                                    `pin` INT NULL,
                                                     PRIMARY KEY (`idUser`))
     ENGINE = InnoDB;
 
@@ -62,26 +71,18 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 #--------------------------------- INSERT INTO STATEMENTS --------------------------------------
 USE kaffeeliste;
 
-INSERT INTO `user` (`idUser`, `Name`, `Rolle`) VALUES
-                                                   (1, 'Mayer', 'User'),
-                                                   (2, 'Probst', 'User'),
-                                                   (3, 'Ackerman', 'User'),
-                                                   (4, 'Foerster', 'User'),
-                                                   (5, 'Friedmann', 'User'),
-                                                   (6, 'Fassbinder', 'User'),
-                                                   (7, 'Ostermann', 'User'),
-                                                   (8, 'Windisch', 'Administrator');
+INSERT INTO `user` (`idUser`, `Name`, `Rolle`, `pin`) VALUES
+                                                   (1, 'Mayer', 'User', NULL),
+                                                   (2, 'Probst', 'User', NULL),
+                                                   (3, 'Ackerman', 'User', NULL),
+                                                   (4, 'Foerster', 'User', NULL),
+                                                   (5, 'Friedmann', 'User', NULL),
+                                                   (6, 'Fassbinder', 'User', NULL),
+                                                   (7, 'Ostermann', 'User', NULL),
+                                                   (8, 'Windisch', 'Administrator', 1234);
 
 
 INSERT INTO `kaffee` (`idKaffee`, `Name`, `Preis`) VALUES
                                                        (1, 'Espresso', 100),
                                                        (2, 'Verlängerter', 150),
                                                        (3, 'Cappuccino', 250);
-#------pin
-
-Use kaffeeliste;
-
-ALTER TABLE user
-    ADD pin int NULL;
-#-----------insert
-UPDATE `user` SET `pin` = '1234' WHERE `user`.`idUser` = 1;
