@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<VBox alignment="CENTER" spacing="8.0" xmlns:fx="http://javafx.com/fxml" fx:controller="memoFwinAdrian.lbs.vier.AdminController">
+    <Label fx:id="labelField" text="Please enter your pin" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
+    <TextField fx:id="pinField" VBox.vgrow="ALWAYS" maxWidth="Infinity" onKeyPressed="#onPinKeyPressed"/>
+    <TextField fx:id="addField" VBox.vgrow="ALWAYS" visible="false" maxWidth="Infinity"/>
+    <ComboBox fx:id="comboBox" visible="false" onAction="#onSelectShowing"/>
+
+    <HBox spacing="8.0">
+        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Back" onAction="#onBackButtonClick"/>
+        <Button fx:id="loginButton" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Login" onAction="#onLoginButtonClick"/>
+        <Button fx:id="submitButton" visible="false" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Submit" disable="true" onAction="#onSubmitButtonClick"/>
+    </HBox>
+</VBox>
