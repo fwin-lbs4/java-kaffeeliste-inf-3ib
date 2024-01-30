@@ -9,9 +9,12 @@ import javafx.scene.layout.VBox;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class SelectCoffeeController extends GenericController {
     private final List<Coffee> coffeeList = new ArrayList<>();
+    @FXML
+    private Button adminButton;
     @FXML
     private Label selectedUserLabel;
     private Coffee selectedCoffee;
@@ -22,10 +25,10 @@ public class SelectCoffeeController extends GenericController {
 
     @FXML
     protected void onRefreshButtonClick() {
-        System.out.println(this.currentUser.getUser() == null ? "Null" : this.currentUser.getUser().getName());
         if (this.currentUser == null) {
             this.onBackButtonClick();
         }
+
         this.submitButton.setDisable(this.selectedCoffee == null);
         ObservableList<Node> children = this.coffeeBox.getChildren();
         children.clear();
@@ -36,23 +39,19 @@ public class SelectCoffeeController extends GenericController {
             Button coffeeButton = new Button();
             coffeeButton.setText(coffee.toString());
             coffeeButton.setMaxWidth(Double.POSITIVE_INFINITY);
-            this.setButton(
-                    coffeeButton,
-                    this.selectedCoffee != null && this.selectedCoffee.getIdKaffee() == coffee.getIdKaffee()
-            );
+
+            coffeeButton.setStyle(this.selectedCoffee != null && this.selectedCoffee.getIdKaffee() == coffee.getIdKaffee() ? """
+                        -fx-background-color: rgb(0,255,0,0.25);
+                        -fx-border-color: rgb(0, 255, 255);
+                    """ : "");
+
             coffeeButton.setOnAction((button) -> {
                 this.selectedCoffee = coffee;
                 this.onRefreshButtonClick();
             });
+
             children.add(coffeeButton);
         });
-    }
-
-    protected void setButton(Button button, boolean active) {
-        button.setStyle(active ? """
-                    -fx-background-color: rgb(0,255,0,0.25);
-                    -fx-border-color: rgb(0, 255, 255);
-                """ : "");
     }
 
     public void refresh() {
@@ -63,6 +62,17 @@ public class SelectCoffeeController extends GenericController {
         this.selectedUserLabel.setText("User \"" + this.currentUser
                 .getUser()
                 .getName() + "\" Schulden: \"" + this.currentUser.getUser().getSchuldenString() + "\"");
+
+        if (Objects.equals(this.currentUser.getUser().getRolle(), "Administrator")) {
+            this.adminButton.setVisible(true);
+        }
+    }
+
+    @FXML
+    protected void onAdminButtonClick() {
+        this.stage.setTitle("Admin");
+        this.scene.setRoot(this.nextRoot);
+        this.nextController.refresh();
     }
 
     @FXML
