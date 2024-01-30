@@ -30,15 +30,20 @@ public class User {
     public void setSchulden(int schulden) {
         this.schulden = schulden;
     }
+    public int getPin() {
+        return this.pin;
+    }
     public String toString() {
         return this.getName();
     }
 
     public String getSchuldenString() {
-        String cents = Integer.toString(this.schulden);
-        cents = cents.substring(cents.length() - 2);
-        String euro = Integer.toString(this.schulden);
-        euro = euro.substring(0, euro.length() - 2);
+        String schulden = Integer.toString(this.schulden);
+        if (schulden.length() < 3) {
+            schulden = "0".repeat(3 - schulden.length()) + schulden;
+        }
+        String cents = schulden.substring(schulden.length() - 2);
+        String euro = schulden.substring(0, schulden.length() - 2);
 
         return "€ " + euro + "," + (cents.equals("00") ? "--" : cents);
     }
