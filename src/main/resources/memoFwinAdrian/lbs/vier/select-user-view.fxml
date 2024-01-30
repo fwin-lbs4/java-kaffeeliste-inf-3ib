@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.ComboBox?>
 <VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="memoFwinAdrian.lbs.vier.SelectUserController">
     <padding>
@@ -13,7 +14,7 @@
 
     <Label fx:id="welcomeText"/>
 
-    <ChoiceBox fx:id="choiceBox" onShowing="#onSelectClick"/>
+    <ComboBox fx:id="comboBox" onShowing="#onSelectClick"/>
 
 
     <Button text="Next" onAction="#onNextButtonClick"/>
