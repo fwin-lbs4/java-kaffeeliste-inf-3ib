@@ -3,7 +3,7 @@ package memoFwinAdrian.lbs.vier;
 /**
  * User-Klasse repräsentiert einen User.
  * Der User hat einen Namen, eine eindeutige ID, eine Rolle, eventuell einen Pin und Schulden/Guthaben.
- * Sie stellt diverse Getter/Setter und Hilfs-Methoden bereit.
+ * Sie stellt diverse Getter/Setter und Helper-Methoden bereit.
  */
 public class User {
     /**
