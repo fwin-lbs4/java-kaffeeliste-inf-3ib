@@ -13,7 +13,6 @@ import javafx.scene.input.KeyEvent;
  * Controller-Klasse für die Admin-Ansicht in der Anwendung.
  * Erweitert die GenericController-Klasse, um gemeinsame Funktionalitäten zu erben.
  */
-
 public class AdminController extends GenericController {
     /**
      * Field in dem die Gutschrift eingegeben wird.
@@ -60,6 +59,7 @@ public class AdminController extends GenericController {
         this.addField.setVisible(false);
         this.pinField.clear();
     }
+
     /**
      * Behandelt die Aktion, wenn der Anmelde-Button angeklickt wird.
      * Versucht, den Benutzer basierend auf der eingegebenen PIN anzumelden.
@@ -88,6 +88,7 @@ public class AdminController extends GenericController {
 
         this.reset();
     }
+
     /**
      * Behandelt die Aktion, wenn der Button angeklickt wird.
      * Fügt einen Schulden-Eintrag hinzu und aktualisiert die Benutzeroberfläche.
@@ -105,6 +106,7 @@ public class AdminController extends GenericController {
         this.onBackButtonClick();
         this.previousController.refresh();
     }
+
     /**
      * Behandelt die Aktion, wenn der Zurück-Button angeklickt wird.
      * Setzt die UI zurück und navigiert zur vorherigen Ansicht zurück.
@@ -116,6 +118,7 @@ public class AdminController extends GenericController {
         this.stage.setTitle("Select Coffee!");
         this.scene.setRoot(this.previousRoot);
     }
+
     /**
      * Behandelt die Aktion, wenn ein Element in der ComboBox ausgewählt wird.
      * Aktualisiert die Benutzeroberfläche basierend auf dem ausgewählten Benutzer.
@@ -134,6 +137,7 @@ public class AdminController extends GenericController {
         User user = this.comboBox.getSelectionModel().getSelectedItem();
         this.labelField.setText(user.getName() + " - " + user.getSchuldenString());
     }
+
     /**
      * Behandelt die Aktion, wenn eine Taste auf der PIN-Tastatur gedrückt wird.
      * Wenn die Enter-Taste gedrückt wird, wird die Anmeldeaktion ausgelöst.
