@@ -4,11 +4,12 @@
 <?import javafx.scene.layout.*?>
 <VBox alignment="BOTTOM_CENTER" spacing="8.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="memoFwinAdrian.lbs.vier.SelectCoffeeController">
-
     <Label fx:id="selectedUserNameLabel"/>
     <Label fx:id="selectedUserSchuldenLabel"/>
+
     <Button fx:id="adminButton" VBox.vgrow="ALWAYS" maxWidth="Infinity" text="Admin" visible="false"
             onAction="#onAdminButtonClick"/>
+
     <ScrollPane VBox.vgrow="ALWAYS" maxHeight="Infinity" fitToHeight="true" fitToWidth="true">
         <VBox alignment="TOP_CENTER" maxWidth="Infinity" spacing="8.0" fx:id="coffeeBox"/>
     </ScrollPane>
