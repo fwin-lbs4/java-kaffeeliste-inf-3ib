@@ -1,11 +1,11 @@
 package memoFwinAdrian.lbs.vier;
 
 public class User {
-    private String name;
-    private int idUser;
+    private final String name;
+    private final int idUser;
+    private final String rolle;
+    private final int pin;
     private int schulden;
-    private String rolle;
-    private int pin;
 
     public User(String name, int schulden, int idUser, String rolle, int pin) {
         this.name = name;
@@ -44,27 +44,18 @@ public class User {
     }
 
     public String getSchuldenString() {
-        int schuldenValue = this.schulden;
+        String schuldenValue = Integer.toString(this.schulden >= 0 ? this.schulden : this.schulden * -1);
+        String schuldenType = this.schulden >= 0 ? "Schulden" : "Guthaben";
 
-        String schuldenType = "";
-        if (schuldenValue >= 0) {
-            schuldenType = "Schulden";
-        } else {
-            schuldenType = "Guthaben";
-            schuldenValue = schuldenValue * -1;
+        if (schuldenValue.length() < 3) {
+            schuldenValue = "0".repeat(3 - schuldenValue.length()) + schuldenValue;
         }
 
-        String schuldenValueString = Integer.toString(schuldenValue);
+        String cents = schuldenValue.substring(schuldenValue.length() - 2);
+        String euro = schuldenValue.substring(0, schuldenValue.length() - 2);
 
-        if (schuldenValueString.length() < 3) {
-            schuldenValueString = "0".repeat(3 - schuldenValueString.length()) + schuldenValueString;
-        }
+        schuldenValue = "€ " + euro + "," + (cents.equals("00") ? "--" : cents);
 
-        String cents = schuldenValueString.substring(schuldenValueString.length() - 2);
-        String euro = schuldenValueString.substring(0, schuldenValueString.length() - 2);
-
-        schuldenValueString = "€ " + euro + "," + (cents.equals("00") ? "--" : cents);
-
-        return schuldenType + ": " + schuldenValueString;
+        return schuldenType + ": " + schuldenValue;
     }
 }
