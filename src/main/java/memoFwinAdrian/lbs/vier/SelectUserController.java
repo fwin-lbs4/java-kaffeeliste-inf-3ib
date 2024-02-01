@@ -9,9 +9,9 @@ import javafx.scene.control.Label;
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
  */
 public class SelectUserController extends GenericController {
-    @FXML
-    private Label welcomeText;
-    private Label box;
+    /**
+     * Die comboBox in der die User ausgewählt werden.
+     */
     @FXML
     private ComboBox<User> comboBox;
 
