@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 <VBox alignment="BOTTOM_CENTER" spacing="8.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="memoFwinAdrian.lbs.vier.SelectCoffeeController">
 
-    <Label fx:id="selectedUserLabel"/>
-    <Button fx:id="adminButton" VBox.vgrow="ALWAYS" maxWidth="Infinity" text="Admin" visible="false" onAction="#onAdminButtonClick"/>
-    <VBox alignment="TOP_CENTER" spacing="8.0" VBox.vgrow="ALWAYS" maxHeight="Infinity" fx:id="coffeeBox"/>
+    <Label fx:id="selectedUserNameLabel"/>
+    <Label fx:id="selectedUserSchuldenLabel"/>
+    <Button fx:id="adminButton" VBox.vgrow="ALWAYS" maxWidth="Infinity" text="Admin" visible="false"
+            onAction="#onAdminButtonClick"/>
+    <ScrollPane VBox.vgrow="ALWAYS" maxHeight="Infinity" fitToHeight="true" fitToWidth="true">
+        <VBox alignment="TOP_CENTER" maxWidth="Infinity" spacing="8.0" fx:id="coffeeBox"/>
+    </ScrollPane>
+
 
     <HBox spacing="8.0">
         <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Back" onAction="#onBackButtonClick"/>
         <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Refresh" onAction="#onRefreshButtonClick"/>
-        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Submit" fx:id="submitButton" disable="true" onAction="#onSubmitButtonClick"/>
+        <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Submit" fx:id="submitButton" disable="true"
+                onAction="#onSubmitButtonClick"/>
     </HBox>
 </VBox>
