@@ -36,7 +36,7 @@ public class CoffeeController extends GenericController {
     @FXML
     private Label selectedUserNameLabel;
     /**
-     * Label das die Schulden des User beinhaltet.
+     * Label welches die Schulden des Users beinhaltet.
      */
     @FXML
     private Label selectedUserSchuldenLabel;
