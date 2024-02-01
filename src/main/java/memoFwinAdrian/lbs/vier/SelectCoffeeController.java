@@ -21,16 +21,37 @@ import java.util.Objects;
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
  */
 public class SelectCoffeeController extends GenericController {
+    /**
+     * Liste der Kaffees.
+     */
     private final List<Coffee> coffeeList = new ArrayList<>();
+    /**
+     * Der admin-button.
+     */
     @FXML
     private Button adminButton;
+    /**
+     * Label das den ausgewählten Usernamen beinhaltet.
+     */
     @FXML
     private Label selectedUserNameLabel;
+    /**
+     * Label das die Schulden des User beinhaltet.
+     */
     @FXML
     private Label selectedUserSchuldenLabel;
+    /**
+     * Der ausgewählte Kaffee.
+     */
     private Coffee selectedCoffee;
+    /**
+     * Vbox welche die Liste der Kaffees hält.
+     */
     @FXML
     private VBox coffeeBox;
+    /**
+     * Der submit button.
+     */
     @FXML
     private Button submitButton;
 
