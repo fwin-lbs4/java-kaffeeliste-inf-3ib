@@ -5,7 +5,7 @@ package memoFwinAdrian.lbs.vier;
  */
 public final class UserHolder {
     /**
-     * Die interne Instanz des Userholders.
+     * Die interne Instanz des User holders.
      */
     private final static UserHolder INSTANCE = new UserHolder();
     /**
@@ -19,7 +19,7 @@ public final class UserHolder {
     /**
      * Getter für die globale Instanz.
      *
-     * @return Die globale Instanz des Userholders.
+     * @return Die globale Instanz des User holders.
      */
     public static UserHolder getInstance() {
         return INSTANCE;
