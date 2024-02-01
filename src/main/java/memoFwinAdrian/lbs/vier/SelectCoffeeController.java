@@ -15,6 +15,7 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
 /**
  * Controller-Klasse für die Ansicht zur Auswahl von Kaffee.
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
@@ -32,6 +33,7 @@ public class SelectCoffeeController extends GenericController {
     private VBox coffeeBox;
     @FXML
     private Button submitButton;
+
     /**
      * Aktualisiert die Kaffeeauswahl in der Benutzeroberfläche.
      */
@@ -52,7 +54,7 @@ public class SelectCoffeeController extends GenericController {
             coffeeButton.setText(coffee.toString());
             coffeeButton.setMaxWidth(Double.POSITIVE_INFINITY);
 
-            coffeeButton.setStyle(this.selectedCoffee != null && this.selectedCoffee.getIdKaffee() == coffee.getIdKaffee() ? """
+            coffeeButton.setStyle(this.selectedCoffee != null && this.selectedCoffee.idKaffee() == coffee.idKaffee() ? """
                         -fx-background-color: rgb(0,255,0,0.25);
                         -fx-border-color: rgb(0, 255, 255);
                     """ : "");
@@ -65,6 +67,7 @@ public class SelectCoffeeController extends GenericController {
             children.add(coffeeButton);
         });
     }
+
     /**
      * Aktualisiert die Benutzeroberfläche und zeigt Benutzerinformationen und den Admin-Button an.
      */
@@ -89,16 +92,16 @@ public class SelectCoffeeController extends GenericController {
             bgColor = new Color(1, 0, 0, 0.25);
         }
 
-        this.selectedUserSchuldenLabel.setBackground(new Background(new BackgroundFill(
-                bgColor,
-                new CornerRadii(0),
-                new Insets(0)
+        this.selectedUserSchuldenLabel.setBackground(new Background(new BackgroundFill(bgColor,
+                                                                                       new CornerRadii(0),
+                                                                                       new Insets(0)
         )));
 
         if (Objects.equals(this.currentUser.getUser().getRolle(), "Administrator")) {
             this.adminButton.setVisible(true);
         }
     }
+
     /**
      * Behandelt die Aktion, wenn der Admin-Button angeklickt wird.
      * Navigiert zur Admin-Ansicht.
@@ -109,6 +112,7 @@ public class SelectCoffeeController extends GenericController {
         this.scene.setRoot(this.nextRoot);
         this.nextController.refresh();
     }
+
     /**
      * Behandelt die Aktion, wenn der Übermitteln-Button angeklickt wird.
      * Fügt Schulden für den ausgewählten Kaffee hinzu und kehrt zur vorherigen Ansicht zurück.
@@ -116,10 +120,11 @@ public class SelectCoffeeController extends GenericController {
     @FXML
     protected void onSubmitButtonClick() {
         if (this.currentUser.getUser() != null && this.selectedCoffee != null) {
-            this.db.addSchulden(this.currentUser.getUser(), this.selectedCoffee.getPreis());
+            this.db.addSchulden(this.currentUser.getUser(), this.selectedCoffee.preis());
         }
         this.onBackButtonClick();
     }
+
     /**
      * Behandelt die Aktion, wenn der Zurück-Button angeklickt wird.
      * Setzt die ausgewählte Kaffeeinformation zurück und navigiert zur vorherigen Ansicht zurück.
