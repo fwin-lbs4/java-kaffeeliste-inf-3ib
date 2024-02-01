@@ -11,6 +11,9 @@ import java.util.List;
  */
 public class Datenbank {
 
+    /**
+     * Datenbank-Verbindung
+     */
     private final Connection connection;
 
     /**
@@ -40,22 +43,20 @@ public class Datenbank {
      * @return Ein Objekt der Klasse User mit den Benutzerinformationen.
      */
     public User getUserInfos(int idUser) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-       """
-                SELECT
-                    u.Name as Name,
-                    u.Pin as Pin,
-                    COALESCE(SUM(s.Anderung), 0) AS Schulden,
-                    u.Rolle as Rolle
-                FROM
-                    user AS u
-                    LEFT JOIN schulden AS s ON u.idUser = s.User_idUser
-                WHERE u.idUser = ?
-                GROUP BY u.idUser
-                LIMIT 1
-           """
-        )) {
-
+        String query = """
+                    SELECT
+                        u.Name as Name,
+                        u.Pin as Pin,
+                        COALESCE(SUM(s.Anderung), 0) AS Schulden,
+                        u.Rolle as Rolle
+                    FROM
+                        user AS u
+                        LEFT JOIN schulden AS s ON u.idUser = s.User_idUser
+                    WHERE u.idUser = ?
+                    GROUP BY u.idUser
+                    LIMIT 1
+                """;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, idUser);
 
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
@@ -84,20 +85,20 @@ public class Datenbank {
     public List<User> getAllUserInfos() {
         List<User> users = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-       """
-               SELECT
-                   u.Name AS Name,
-                   u.Rolle AS Rolle,
-                   u.idUser AS idUser,
-                   u.pin AS Pin,
-                   COALESCE(SUM(s.Anderung), 0) AS Schulden
-               FROM
-                   user AS u
-                   LEFT JOIN schulden AS s ON u.idUser = s.User_idUser
-               GROUP BY u.idUser;
-           """
-        )) {
+        String query = """
+                    SELECT
+                        u.Name AS Name,
+                        u.Rolle AS Rolle,
+                        u.idUser AS idUser,
+                        u.pin AS Pin,
+                        COALESCE(SUM(s.Anderung), 0) AS Schulden
+                    FROM
+                        user AS u
+                        LEFT JOIN schulden AS s ON u.idUser = s.User_idUser
+                    GROUP BY u.idUser;
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     String name = resultSet.getString("Name");
@@ -124,16 +125,15 @@ public class Datenbank {
     public List<Coffee> getAllCoffees() {
         List<Coffee> coffees = new ArrayList<>();
 
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-        """
-                SELECT
-                    Preis AS Preis,
-                    Name AS Name,
-                    idKaffee AS idKaffee
-                FROM kaffee;
-            """
-        )) {
+        String query = """
+                    SELECT
+                        Preis AS Preis,
+                        Name AS Name,
+                        idKaffee AS idKaffee
+                    FROM kaffee;
+                """;
 
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
                     int idKaffee = resultSet.getInt("idKaffee");
@@ -155,27 +155,24 @@ public class Datenbank {
      *
      * @param user     Das Benutzerobjekt, für das Schulden hinzugefügt werden sollen.
      * @param schulden Der Betrag der hinzuzufügenden Schulden.
-     * @return True wenn Schulden hinzufügen erfolgreich war sonst False.
      */
-    public Boolean addSchulden(User user, int schulden) {
-        try (PreparedStatement preparedStatement = connection.prepareStatement(
-       """
-                INSERT INTO schulden
-                    (`User_idUser`, `Anderung`, `Zeitstempel`)
-                VALUES
-                    (?, ?, ?);
-           """
-        )) {
+    public void addSchulden(User user, int schulden) {
+        String insert = """
+                    INSERT INTO schulden
+                        (`User_idUser`, `Anderung`, `Zeitstempel`)
+                    VALUES
+                        (?, ?, ?);
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insert)) {
             preparedStatement.setInt(1, user.getIdUser());
             preparedStatement.setInt(2, schulden);
             preparedStatement.setDate(3, Date.valueOf(LocalDate.now()));
             preparedStatement.executeUpdate();
 
             user.setSchulden(user.getSchulden() + schulden);
-            return true;
         } catch (SQLException e) {
             e.printStackTrace();
-            return false;
         }
     }
 }
