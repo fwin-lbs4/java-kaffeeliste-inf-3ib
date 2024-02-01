@@ -9,6 +9,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
+/**
+ * Controller-Klasse für die Admin-Ansicht in der Anwendung.
+ * Erweitert die GenericController-Klasse, um gemeinsame Funktionalitäten zu erben.
+ */
+
 public class AdminController extends GenericController {
     @FXML
     private TextField addField;
@@ -23,6 +28,9 @@ public class AdminController extends GenericController {
     @FXML
     private ComboBox<User> comboBox;
 
+    /**
+     * Setzt die UI-Elemente auf ihren ursprünglichen Zustand zurück.
+     */
     private void reset() {
         this.loginButton.setVisible(true);
         this.submitButton.setVisible(false);
@@ -34,7 +42,10 @@ public class AdminController extends GenericController {
         this.addField.setVisible(false);
         this.pinField.clear();
     }
-
+    /**
+     * Behandelt die Aktion, wenn der Anmelde-Button angeklickt wird.
+     * Versucht, den Benutzer basierend auf der eingegebenen PIN anzumelden.
+     */
     @FXML
     protected void onLoginButtonClick() {
         try {
@@ -59,7 +70,10 @@ public class AdminController extends GenericController {
 
         this.reset();
     }
-
+    /**
+     * Behandelt die Aktion, wenn der Button angeklickt wird.
+     * Fügt einen Schulden-Eintrag hinzu und aktualisiert die Benutzeroberfläche.
+     */
     @FXML
     protected void onSubmitButtonClick() {
         if (this.comboBox.getSelectionModel().getSelectedItem() == null) {
@@ -73,7 +87,10 @@ public class AdminController extends GenericController {
         this.onBackButtonClick();
         this.previousController.refresh();
     }
-
+    /**
+     * Behandelt die Aktion, wenn der Zurück-Button angeklickt wird.
+     * Setzt die UI zurück und navigiert zur vorherigen Ansicht zurück.
+     */
     @FXML
     protected void onBackButtonClick() {
         this.reset();
@@ -81,7 +98,10 @@ public class AdminController extends GenericController {
         this.stage.setTitle("Select Coffee!");
         this.scene.setRoot(this.previousRoot);
     }
-
+    /**
+     * Behandelt die Aktion, wenn ein Element in der ComboBox ausgewählt wird.
+     * Aktualisiert die Benutzeroberfläche basierend auf dem ausgewählten Benutzer.
+     */
     @FXML
     protected void onSelectShowing() {
         if (this.comboBox.getSelectionModel().getSelectedItem() == null) {
@@ -96,7 +116,10 @@ public class AdminController extends GenericController {
         User user = this.comboBox.getSelectionModel().getSelectedItem();
         this.labelField.setText(user.getName() + " - " + user.getSchuldenString());
     }
-
+    /**
+     * Behandelt die Aktion, wenn eine Taste auf der PIN-Tastatur gedrückt wird.
+     * Wenn die Enter-Taste gedrückt wird, wird die Anmeldeaktion ausgelöst.
+     */
     @FXML
     protected void onPinKeyPressed(KeyEvent keyEvent) {
         if (keyEvent.getCode() == KeyCode.ENTER) {

@@ -5,7 +5,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.List;
-
+/**
+ * Generischer Controller, der gemeinsame Funktionalitäten für verschiedene Ansichten bereitstellt.
+ */
 public class GenericController {
     protected Stage stage;
     protected Scene scene;
@@ -17,6 +19,19 @@ public class GenericController {
     protected UserHolder currentUser;
     protected List<User> userList;
 
+    /**
+     * Initialisiert den Controller mit den erforderlichen Ressourcen.
+     *
+     * @param db                  Datenbank-Objekt
+     * @param stage               JavaFX Stage-Objekt
+     * @param scene               JavaFX Scene-Objekt
+     * @param previousRoot        Vorherige Wurzel (Parent) der Szene
+     * @param previousController  Vorheriger Controller
+     * @param nextRoot            Nächste Wurzel (Parent) der Szene
+     * @param nextController      Nächster Controller
+     * @param currentUser         Benutzerinformationen
+     * @param userList            Liste der Benutzer
+     */
     public void setup(
             Datenbank db,
             Stage stage,
@@ -40,7 +55,15 @@ public class GenericController {
 
         this.init();
     }
-
+    /**
+     * Methode zur Initialisierung des Controllers.
+     * Diese Methode kann von abgeleiteten Klassen überschrieben werden, um spezifische Initialisierungen vorzunehmen.
+     */
     protected void init() {}
+
+    /**
+     * Methode zum Aktualisieren der Benutzeroberfläche.
+     * Diese Methode kann von abgeleiteten Klassen überschrieben werden, um spezifische Aktualisierungen vorzunehmen.
+     */
     protected void refresh() {}
 }

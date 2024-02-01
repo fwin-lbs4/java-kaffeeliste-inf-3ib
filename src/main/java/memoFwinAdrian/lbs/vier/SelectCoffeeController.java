@@ -10,7 +10,10 @@ import javafx.scene.layout.VBox;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
+/**
+ * Controller-Klasse für die Ansicht zur Auswahl von Kaffee.
+ * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
+ */
 public class SelectCoffeeController extends GenericController {
     private final List<Coffee> coffeeList = new ArrayList<>();
     @FXML
@@ -22,7 +25,9 @@ public class SelectCoffeeController extends GenericController {
     private VBox coffeeBox;
     @FXML
     private Button submitButton;
-
+    /**
+     * Aktualisiert die Kaffeeauswahl in der Benutzeroberfläche.
+     */
     @FXML
     protected void onRefreshButtonClick() {
         if (this.currentUser == null) {
@@ -53,7 +58,9 @@ public class SelectCoffeeController extends GenericController {
             children.add(coffeeButton);
         });
     }
-
+    /**
+     * Aktualisiert die Benutzeroberfläche und zeigt Benutzerinformationen und den Admin-Button an.
+     */
     public void refresh() {
         if (this.currentUser.getUser() == null) {
             this.onBackButtonClick();
@@ -67,14 +74,20 @@ public class SelectCoffeeController extends GenericController {
             this.adminButton.setVisible(true);
         }
     }
-
+    /**
+     * Behandelt die Aktion, wenn der Admin-Button angeklickt wird.
+     * Navigiert zur Admin-Ansicht.
+     */
     @FXML
     protected void onAdminButtonClick() {
         this.stage.setTitle("Admin");
         this.scene.setRoot(this.nextRoot);
         this.nextController.refresh();
     }
-
+    /**
+     * Behandelt die Aktion, wenn der Übermitteln-Button angeklickt wird.
+     * Fügt Schulden für den ausgewählten Kaffee hinzu und kehrt zur vorherigen Ansicht zurück.
+     */
     @FXML
     protected void onSubmitButtonClick() {
         if (this.currentUser.getUser() != null && this.selectedCoffee != null) {
@@ -82,7 +95,10 @@ public class SelectCoffeeController extends GenericController {
         }
         this.onBackButtonClick();
     }
-
+    /**
+     * Behandelt die Aktion, wenn der Zurück-Button angeklickt wird.
+     * Setzt die ausgewählte Kaffeeinformation zurück und navigiert zur vorherigen Ansicht zurück.
+     */
     @FXML
     protected void onBackButtonClick() {
         this.selectedCoffee = null;
@@ -90,6 +106,9 @@ public class SelectCoffeeController extends GenericController {
         this.scene.setRoot(this.previousRoot);
     }
 
+    /**
+     * Überschreibt die init-Methode der GenericController-Klasse und ruft die Aktualisierung der Kaffeeauswahl auf.
+     */
     @Override
     public void init() {
         this.onRefreshButtonClick();
