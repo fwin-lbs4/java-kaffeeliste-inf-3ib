@@ -26,8 +26,8 @@ public class CoffeeApplication extends Application {
 
         List<User> userList = db.getAllUserInfos();
 
-        FXMLLoader userLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-user-view.fxml"));
-        FXMLLoader coffeeLoader = new FXMLLoader(CoffeeApplication.class.getResource("select-coffee-view.fxml"));
+        FXMLLoader userLoader = new FXMLLoader(CoffeeApplication.class.getResource("user-view.fxml"));
+        FXMLLoader coffeeLoader = new FXMLLoader(CoffeeApplication.class.getResource("coffee-view.fxml"));
         FXMLLoader adminLoader = new FXMLLoader(CoffeeApplication.class.getResource("admin-view.fxml"));
 
         Parent userRoot = userLoader.load();
@@ -39,8 +39,8 @@ public class CoffeeApplication extends Application {
         stage.setTitle("Select User!");
         stage.setScene(scene);
 
-        SelectUserController userController = userLoader.getController();
-        SelectCoffeeController coffeeController = coffeeLoader.getController();
+        UserController userController = userLoader.getController();
+        CoffeeController coffeeController = coffeeLoader.getController();
         AdminController adminController = adminLoader.getController();
 
         userController.setup(

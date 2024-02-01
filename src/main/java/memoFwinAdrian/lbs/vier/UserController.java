@@ -8,7 +8,7 @@ import javafx.scene.control.ComboBox;
  * Controller-Klasse für die Benutzerauswahl-Ansicht.
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
  */
-public class SelectUserController extends GenericController {
+public class UserController extends GenericController {
     /**
      * Die comboBox in der die User ausgewählt werden.
      */

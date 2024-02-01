@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <VBox alignment="BOTTOM_CENTER" spacing="8.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="memoFwinAdrian.lbs.vier.SelectCoffeeController">
+      fx:controller="memoFwinAdrian.lbs.vier.CoffeeController">
     <Label fx:id="selectedUserNameLabel"/>
     <Label fx:id="selectedUserSchuldenLabel"/>
 

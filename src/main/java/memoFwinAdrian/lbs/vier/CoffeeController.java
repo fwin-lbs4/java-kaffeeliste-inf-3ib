@@ -20,7 +20,7 @@ import java.util.Objects;
  * Controller-Klasse für die Ansicht zur Auswahl von Kaffee.
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
  */
-public class SelectCoffeeController extends GenericController {
+public class CoffeeController extends GenericController {
     /**
      * Liste der Kaffees.
      */
