@@ -9,7 +9,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.List;
 
-
+/**
+ * Klasse welche die JavaFX-Applikation startet.
+ */
 public class CoffeeApplication extends Application {
     public static void main(String[] args) {
         launch();
@@ -33,6 +35,7 @@ public class CoffeeApplication extends Application {
         Parent adminRoot = adminLoader.load();
 
         Scene scene = new Scene(userRoot, 320, 240);
+
         stage.setTitle("Select User!");
         stage.setScene(scene);
 
@@ -40,10 +43,41 @@ public class CoffeeApplication extends Application {
         SelectCoffeeController coffeeController = coffeeLoader.getController();
         AdminController adminController = adminLoader.getController();
 
-        userController.setup(db, stage, scene, null, null, coffeeRoot, coffeeController, holder, userList);
-        coffeeController.setup(db, stage, scene, userRoot, userController, adminRoot, adminController, holder, userList);
-        adminController.setup(db, stage, scene, coffeeRoot, coffeeController, null, null, holder, userList);
+        userController.setup(
+                db,
+                stage,
+                scene,
+                null,
+                null,
+                coffeeRoot,
+                coffeeController,
+                holder,
+                userList
+        );
 
+        coffeeController.setup(
+                db,
+                stage,
+                scene,
+                userRoot,
+                userController,
+                adminRoot,
+                adminController,
+                holder,
+                userList
+        );
+
+        adminController.setup(
+                db,
+                stage,
+                scene,
+                coffeeRoot,
+                coffeeController,
+                null,
+                null,
+                holder,
+                userList
+        );
 
         stage.show();
     }
