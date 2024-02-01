@@ -49,15 +49,22 @@ public class AdminController extends GenericController {
      * Setzt die UI-Elemente auf ihren ursprünglichen Zustand zurück.
      */
     private void reset() {
-        this.loginButton.setVisible(true);
         this.submitButton.setVisible(false);
-        this.pinField.setVisible(true);
+        this.submitButton.setManaged(false);
         this.comboBox.setVisible(false);
+        this.comboBox.setManaged(false);
+        this.addField.setVisible(false);
+        this.addField.setManaged(false);
+
         this.comboBox.valueProperty().set(null);
         this.labelField.setText("Please enter your pin");
         this.addField.clear();
-        this.addField.setVisible(false);
         this.pinField.clear();
+
+        this.loginButton.setVisible(true);
+        this.loginButton.setManaged(true);
+        this.pinField.setVisible(true);
+        this.pinField.setManaged(true);
     }
 
     /**
@@ -71,9 +78,10 @@ public class AdminController extends GenericController {
 
             if (this.currentUser.getUser().getPin() == pin) {
                 this.loginButton.setVisible(false);
-                this.submitButton.setVisible(true);
+                this.loginButton.setManaged(false);
                 this.pinField.setVisible(false);
-                this.comboBox.setVisible(true);
+                this.pinField.setManaged(false);
+
                 this.labelField.setText("Admin");
                 this.addField.clear();
                 this.pinField.clear();
@@ -81,6 +89,12 @@ public class AdminController extends GenericController {
                 ObservableList<User> list = this.comboBox.getItems();
                 list.clear();
                 list.addAll(this.userList);
+
+                this.submitButton.setVisible(true);
+                this.submitButton.setManaged(true);
+                this.comboBox.setVisible(true);
+                this.comboBox.setManaged(true);
+
                 return;
             }
         } catch (NumberFormatException ignored) {
@@ -126,16 +140,22 @@ public class AdminController extends GenericController {
     @FXML
     protected void onSelectShowing() {
         if (this.comboBox.getSelectionModel().getSelectedItem() == null) {
-            this.submitButton.setDisable(true);
             this.addField.setVisible(false);
+            this.addField.setManaged(false);
+
             this.labelField.setText("Admin");
+            this.submitButton.setDisable(true);
+
             return;
         }
 
         this.submitButton.setDisable(false);
-        this.addField.setVisible(true);
+
         User user = this.comboBox.getSelectionModel().getSelectedItem();
         this.labelField.setText(user.getName() + " - " + user.getSchuldenString());
+
+        this.addField.setVisible(true);
+        this.addField.setManaged(true);
     }
 
     /**

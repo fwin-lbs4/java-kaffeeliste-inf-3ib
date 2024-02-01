@@ -5,15 +5,15 @@
 <VBox alignment="CENTER" spacing="8.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="memoFwinAdrian.lbs.vier.AdminController">
     <Label fx:id="labelField" text="Please enter your pin" VBox.vgrow="ALWAYS" maxWidth="Infinity"/>
+    <ComboBox fx:id="comboBox" VBox.vgrow="ALWAYS" maxWidth="Infinity" visible="false" managed="false" promptText="Select User!" onAction="#onSelectShowing"/>
     <TextField fx:id="pinField" VBox.vgrow="ALWAYS" maxWidth="Infinity" onKeyPressed="#onPinKeyPressed"/>
-    <TextField fx:id="addField" VBox.vgrow="ALWAYS" visible="false" maxWidth="Infinity"/>
-    <ComboBox fx:id="comboBox" visible="false" onAction="#onSelectShowing"/>
+    <TextField fx:id="addField" VBox.vgrow="ALWAYS" maxWidth="Infinity" visible="false" managed="false"/>
 
     <HBox spacing="8.0">
         <Button HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Back" onAction="#onBackButtonClick"/>
         <Button fx:id="loginButton" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Login"
                 onAction="#onLoginButtonClick"/>
-        <Button fx:id="submitButton" visible="false" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Submit"
+        <Button fx:id="submitButton" visible="false" managed="false" HBox.hgrow="ALWAYS" maxWidth="Infinity" text="Submit"
                 disable="true" onAction="#onSubmitButtonClick"/>
     </HBox>
 </VBox>
