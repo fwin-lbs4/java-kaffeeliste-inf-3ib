@@ -2,9 +2,10 @@ package memoFwinAdrian.lbs.vier;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.List;
 class DatenbankTest {
 
     @Test
