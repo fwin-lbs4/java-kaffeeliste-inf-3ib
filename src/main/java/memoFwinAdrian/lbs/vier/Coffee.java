@@ -3,43 +3,19 @@ package memoFwinAdrian.lbs.vier;
 /**
  * Die Klasse Coffee repräsentiert Kaffeeartikeln mit einer eindeutigen ID, einem Namen und einem Preis.
  * Sie stellt Methoden bereit, um die ID, den Namen und den Preis des Kaffees abzurufen und zu setzen.
+ *
+ * @param idKaffee Die eindeutige Kennung für den Kaffee.
+ * @param name     Der Name des Kaffees.
+ * @param preis    Der Preis des Kaffees.
  */
-public class Coffee {
-
-    /**
-     * Die eindeutige Kennung für den Kaffee.
-     */
-    private int idKaffee;
-
-    /**
-     * Der Name des Kaffees.
-     */
-    private String name;
-
-    /**
-     * Der Preis des Kaffees.
-     */
-    private int preis;
-
-    /**
-     * Konstruiert ein neues Coffee-Objekt mit der angegebenen ID, dem Namen und dem Preis.
-     *
-     * @param idKaffee Die eindeutige Kennung für den Kaffee.
-     * @param name     Der Name des Kaffees.
-     * @param preis    Der Preis des Kaffees.
-     */
-    public Coffee(int idKaffee, String name, int preis) {
-        this.idKaffee = idKaffee;
-        this.name = name;
-        this.preis = preis;
-    }
-
+public record Coffee(int idKaffee, String name, int preis) {
     /**
      * Gibt die eindeutige Kennung des Kaffees zurück.
      *
      * @return Die eindeutige Kennung des Kaffees.
      */
-    public int getIdKaffee() {
+    @Override
+    public int idKaffee() {
         return idKaffee;
     }
 
@@ -48,7 +24,8 @@ public class Coffee {
      *
      * @return Der Name des Kaffees.
      */
-    public String getName() {
+    @Override
+    public String name() {
         return name;
     }
 
@@ -57,10 +34,16 @@ public class Coffee {
      *
      * @return Der Preis des Kaffees.
      */
-    public int getPreis() {
+    @Override
+    public int preis() {
         return preis;
     }
 
+    /**
+     * Gibt eine aufbereitete Representation des Preises zurück.
+     *
+     * @return Aufbereitete Representation des Preises.
+     */
     private String getPreisString() {
         String preis = Integer.toString(this.preis);
         if (preis.length() < 3) {
@@ -72,9 +55,13 @@ public class Coffee {
         return "€ " + euro + "," + (cents.equals("00") ? "--" : cents);
     }
 
+    /**
+     * Gibt eine aufbereitete Representation des Kaffees zurück.
+     *
+     * @return Aufbereitete Representation des Kaffees.
+     */
     public String toString() {
-        return this.getName() + " " + this.getPreisString();
+        return this.name() + " " + this.getPreisString();
     }
-
 }
 
