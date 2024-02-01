@@ -27,6 +27,7 @@ public class Datenbank {
         String url = "jdbc:mysql://localhost/kaffeeliste";
         String username = "root";
         String password = null;
+
         try {
             this.connection = DriverManager.getConnection(url, username, password);
             System.out.println("Verbindung hergestellt");
@@ -120,7 +121,7 @@ public class Datenbank {
     /**
      * Ruft die Informationen aller Kaffees aus der Datenbank ab.
      *
-     * @return Eine Liste von Caffee-Objekten mit der Kaffelisten Information.
+     * @return Eine Liste von Kaffee-Objekten mit der Kaffeelisten Information.
      */
     public List<Coffee> getAllCoffees() {
         List<Coffee> coffees = new ArrayList<>();
