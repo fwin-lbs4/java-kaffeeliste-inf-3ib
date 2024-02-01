@@ -15,16 +15,34 @@ import javafx.scene.input.KeyEvent;
  */
 
 public class AdminController extends GenericController {
+    /**
+     * Field in dem die Gutschrift eingegeben wird.
+     */
     @FXML
     private TextField addField;
+    /**
+     * Field in dem der Pin eingegeben wird.
+     */
     @FXML
     private TextField pinField;
+    /**
+     * Überschrift für den View.
+     */
     @FXML
     private Label labelField;
+    /**
+     * Button um den Login zu starten.
+     */
     @FXML
     private Button loginButton;
+    /**
+     * Button um die Gutschrift einzufügen.
+     */
     @FXML
     private Button submitButton;
+    /**
+     * Combobox in der die User ausgewählt werden können.
+     */
     @FXML
     private ComboBox<User> comboBox;
 
