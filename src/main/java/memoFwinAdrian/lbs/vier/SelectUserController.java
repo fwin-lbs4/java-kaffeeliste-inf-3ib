@@ -3,7 +3,7 @@ package memoFwinAdrian.lbs.vier;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
+
 /**
  * Controller-Klasse für die Benutzerauswahl-Ansicht.
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
@@ -14,15 +14,6 @@ public class SelectUserController extends GenericController {
      */
     @FXML
     private ComboBox<User> comboBox;
-
-    /**
-     * Behandelt die Aktion, wenn der "Hello" Button angeklickt wird.
-     * Setzt den Willkommens-Text auf "Select User!".
-     */
-    @FXML
-    protected void onHelloButtonClick() {
-        welcomeText.setText("Select User!");
-    }
 
     /**
      * Behandelt die Aktion, wenn auf "Select" geklickt wird.
