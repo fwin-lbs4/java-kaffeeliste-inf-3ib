@@ -93,6 +93,7 @@ public class CoffeeController extends GenericController {
      * Aktualisiert die Benutzeroberfläche und zeigt Benutzerinformationen und den Admin-Button an.
      */
     public void refresh() {
+        this.userList = this.db.getAllUserInfos();
         if (this.currentUser.getUser() == null) {
             this.onBackButtonClick();
         }
@@ -129,9 +130,9 @@ public class CoffeeController extends GenericController {
      */
     @FXML
     protected void onAdminButtonClick() {
+        this.nextController.refresh();
         this.stage.setTitle("Admin");
         this.scene.setRoot(this.nextRoot);
-        this.nextController.refresh();
     }
 
     /**

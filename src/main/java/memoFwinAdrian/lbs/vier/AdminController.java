@@ -109,16 +109,20 @@ public class AdminController extends GenericController {
      */
     @FXML
     protected void onSubmitButtonClick() {
-        if (this.comboBox.getSelectionModel().getSelectedItem() == null) {
+        User user = this.comboBox.getSelectionModel().getSelectedItem();
+
+        if (user == null) {
             return;
         }
 
-        this.db.addSchulden(this.comboBox.getSelectionModel().getSelectedItem(),
+        this.db.addSchulden(user,
                             -1 * Integer.parseInt(this.addField.getText())
         );
 
-        this.onBackButtonClick();
+        this.currentUser.setUser(user);
+
         this.previousController.refresh();
+        this.onBackButtonClick();
     }
 
     /**
@@ -168,4 +172,10 @@ public class AdminController extends GenericController {
             this.onLoginButtonClick();
         }
     }
+
+    public void refresh() {
+        this.userList = this.db.getAllUserInfos();
+    }
+
+
 }
