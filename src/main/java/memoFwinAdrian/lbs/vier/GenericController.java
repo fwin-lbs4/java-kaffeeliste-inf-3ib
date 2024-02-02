@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Generischer Controller, der gemeinsame Funktionalitäten für verschiedene Ansichten bereitstellt.
  */
-public class GenericController {
+public abstract class GenericController {
     /**
      * Die Stage der Applikation.
      */
