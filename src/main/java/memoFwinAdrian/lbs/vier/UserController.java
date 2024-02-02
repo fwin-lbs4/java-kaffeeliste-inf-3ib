@@ -4,8 +4,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
-import java.util.List;
-
 /**
  * Controller-Klasse für die Benutzerauswahl-Ansicht.
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
