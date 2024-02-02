@@ -4,6 +4,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 
+import java.util.List;
+
 /**
  * Controller-Klasse für die Benutzerauswahl-Ansicht.
  * Erweitert die GenericController-Klasse für gemeinsame Funktionalitäten.
@@ -31,6 +33,11 @@ public class UserController extends GenericController {
     protected void onRefreshButtonClick() {
         ObservableList<User> list = this.comboBox.getItems();
         list.clear();
+
+        this.userList = this.db.getAllUserInfos();
+
+        this.currentUser.setUser(null);
+
         list.addAll(this.userList);
     }
 

@@ -57,6 +57,7 @@ public class Datenbank {
                     GROUP BY u.idUser
                     LIMIT 1
                 """;
+
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setInt(1, idUser);
 

@@ -7,5 +7,6 @@
       fx:controller="memoFwinAdrian.lbs.vier.UserController">
     <ComboBox fx:id="comboBox" promptText="Select User!" onShowing="#onSelectClick"/>
 
+    <Button text="Refresh" onAction="#onRefreshButtonClick"/>
     <Button text="Next" onAction="#onNextButtonClick"/>
 </VBox>
